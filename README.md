@@ -1,0 +1,2 @@
+- fuser -n tcp -k 5672
+- docker build -t antuanuran/pika .

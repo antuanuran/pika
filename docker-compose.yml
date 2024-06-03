@@ -1,0 +1,55 @@
+version: "3.3"
+
+networks:
+  private:
+
+services:
+  rabbit:
+    image: rabbitmq:3-management-alpine
+    networks:
+      - private
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: pass
+  
+  worker:
+    image: antuanuran/pika:latest
+    restart: always
+    networks:
+      - private
+    depends_on:
+      - rabbit
+
+
+
+
+
+        
+#    command: "queue_listener.py"
+
+#  worker:
+#    image: antuanuran/pika:latest
+#    restart: always
+#    networks:
+#      - private
+#    depends_on:
+#      - rabbit
+#    command: "queue_listener.py"
+
+#  bot:
+#    image: antuanuran/skillsup:latest
+#    restart: always
+#    env_file:
+#      - .env
+#    networks:
+#      - private
+#    depends_on:
+#      - db
+#    volumes:
+#      - ./static:/app/static
+#      - ./media:/app/media
+#    command: "python manage.py start_bot"
+
