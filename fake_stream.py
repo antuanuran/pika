@@ -37,6 +37,4 @@ message_json = {
     },
 }
 
-channel.basic_publish(
-    exchange="", routing_key="666", body=json.dumps(message_json)
-)
+channel.basic_publish(exchange="", routing_key="666", body=json.dumps(message_json))
